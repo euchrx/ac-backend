@@ -1,0 +1,1 @@
+{"version":3,"file":"current-companion.decorator.js","sourceRoot":"","sources":["../../../../src/guest-auth/decorators/current-companion.decorator.ts"],"names":[],"mappings":";;;AAAA,2CAAwE;AAI3D,QAAA,gBAAgB,GAAG,IAAA,6BAAoB,EAClD,CAAC,KAAc,EAAE,OAAyB,EAA0B,EAAE;IACpE,MAAM,OAAO,GAAG,OAAO;SACpB,YAAY,EAAE;SACd,UAAU,EAAmD,CAAC;IACjE,OAAO,OAAO,CAAC,SAAS,CAAC;AAC3B,CAAC,CACF,CAAC"}

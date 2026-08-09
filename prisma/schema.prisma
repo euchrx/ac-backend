@@ -1,0 +1,116 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum AttendanceStatus {
+  PENDING
+  CONFIRMED
+  MAYBE
+  NOT_GOING
+}
+
+enum GiftType {
+  MONEY
+  PHYSICAL
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@map("admins")
+}
+
+model Guest {
+  id              String           @id @default(uuid())
+  name            String
+  phone           String
+  normalizedPhone String           @unique
+  attendance      AttendanceStatus @default(PENDING)
+  notes           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  companions  Companion[]
+  giftChoices GuestGiftChoice[]
+
+  @@index([name])
+  @@index([attendance])
+  @@map("guests")
+}
+
+model Companion {
+  id              String   @id @default(uuid())
+  name            String
+  phone           String?
+  normalizedPhone String?  @unique
+  guestId         String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  guest Guest @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  giftChoices CompanionGiftChoice[]
+
+  @@index([guestId])
+  @@map("companions")
+}
+
+model CompanionGiftChoice {
+  id          String   @id @default(uuid())
+  companionId String
+  giftId      String
+  createdAt   DateTime @default(now())
+
+  companion Companion @relation(fields: [companionId], references: [id], onDelete: Cascade)
+  gift      Gift      @relation(fields: [giftId], references: [id], onDelete: Cascade)
+
+  @@unique([companionId, giftId])
+  @@index([companionId])
+  @@index([giftId])
+  @@map("companion_gift_choices")
+}
+
+model Gift {
+  id              String   @id @default(uuid())
+  title           String
+  description     String?
+  type            GiftType @default(PHYSICAL)
+  suggestedAmount Decimal? @db.Decimal(10, 2)
+  externalUrl     String?
+  active          Boolean  @default(true)
+  sortOrder       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  guestChoices GuestGiftChoice[]
+  companionChoices CompanionGiftChoice[]
+
+  @@index([active, sortOrder])
+  @@map("gifts")
+}
+
+model GuestGiftChoice {
+  id        String   @id @default(uuid())
+  guestId   String
+  giftId    String
+  createdAt DateTime @default(now())
+
+  guest Guest @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  gift  Gift  @relation(fields: [giftId], references: [id], onDelete: Cascade)
+
+  @@unique([guestId, giftId])
+  @@index([guestId])
+  @@index([giftId])
+  @@map("guest_gift_choices")
+}

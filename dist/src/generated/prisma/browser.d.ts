@@ -1,0 +1,10 @@
+import * as Prisma from './internal/prismaNamespaceBrowser.js';
+export { Prisma };
+export * as $Enums from './enums.js';
+export * from './enums.js';
+export type Admin = Prisma.AdminModel;
+export type Guest = Prisma.GuestModel;
+export type Companion = Prisma.CompanionModel;
+export type CompanionGiftChoice = Prisma.CompanionGiftChoiceModel;
+export type Gift = Prisma.GiftModel;
+export type GuestGiftChoice = Prisma.GuestGiftChoiceModel;
