@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Injectable,
+  OnModuleInit,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 
@@ -7,11 +11,31 @@ import { AdminLoginDto } from './dto/admin-login.dto';
 import type { AdminTokenPayload } from './interfaces/admin-token-payload.interface';
 
 @Injectable()
-export class AdminAuthService {
+export class AdminAuthService implements OnModuleInit {
   constructor(
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
   ) {}
+
+  async onModuleInit(): Promise<void> {
+    const email = process.env.ADMIN_EMAIL!.trim().toLowerCase();
+    const passwordHash = await bcrypt.hash(process.env.ADMIN_PASSWORD!, 12);
+
+    await this.prisma.admin.upsert({
+      where: { email },
+      update: {
+        name: process.env.ADMIN_NAME?.trim() || 'Família Ana Clara',
+        passwordHash,
+        active: true,
+      },
+      create: {
+        name: process.env.ADMIN_NAME?.trim() || 'Família Ana Clara',
+        email,
+        passwordHash,
+        active: true,
+      },
+    });
+  }
 
   async login(dto: AdminLoginDto) {
     const email = dto.email.trim().toLowerCase();

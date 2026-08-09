@@ -44,7 +44,13 @@ function rateLimit(maxRequests: number, windowMs: number) {
 }
 
 function validateEnvironment(): void {
-  const required = ['DATABASE_URL', 'JWT_ADMIN_SECRET', 'JWT_GUEST_SECRET'];
+  const required = [
+    'DATABASE_URL',
+    'JWT_ADMIN_SECRET',
+    'JWT_GUEST_SECRET',
+    'ADMIN_EMAIL',
+    'ADMIN_PASSWORD',
+  ];
   const missing = required.filter((key) => !process.env[key]?.trim());
   if (missing.length)
     throw new Error(`Variáveis obrigatórias ausentes: ${missing.join(', ')}`);
@@ -57,6 +63,9 @@ function validateEnvironment(): void {
     throw new Error(
       'JWT_ADMIN_SECRET e JWT_GUEST_SECRET devem ser diferentes.',
     );
+  }
+  if ((process.env.ADMIN_PASSWORD?.length ?? 0) < 8) {
+    throw new Error('ADMIN_PASSWORD deve possuir pelo menos 8 caracteres.');
   }
   if (
     process.env.NODE_ENV === 'production' &&

@@ -31,7 +31,13 @@ function rateLimit(maxRequests, windowMs) {
     };
 }
 function validateEnvironment() {
-    const required = ['DATABASE_URL', 'JWT_ADMIN_SECRET', 'JWT_GUEST_SECRET'];
+    const required = [
+        'DATABASE_URL',
+        'JWT_ADMIN_SECRET',
+        'JWT_GUEST_SECRET',
+        'ADMIN_EMAIL',
+        'ADMIN_PASSWORD',
+    ];
     const missing = required.filter((key) => !process.env[key]?.trim());
     if (missing.length)
         throw new Error(`Variáveis obrigatórias ausentes: ${missing.join(', ')}`);
@@ -41,6 +47,9 @@ function validateEnvironment() {
     }
     if (process.env.JWT_ADMIN_SECRET === process.env.JWT_GUEST_SECRET) {
         throw new Error('JWT_ADMIN_SECRET e JWT_GUEST_SECRET devem ser diferentes.');
+    }
+    if ((process.env.ADMIN_PASSWORD?.length ?? 0) < 8) {
+        throw new Error('ADMIN_PASSWORD deve possuir pelo menos 8 caracteres.');
     }
     if (process.env.NODE_ENV === 'production' &&
         !process.env.FRONTEND_URL?.trim()) {

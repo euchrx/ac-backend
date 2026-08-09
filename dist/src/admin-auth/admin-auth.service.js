@@ -54,6 +54,24 @@ let AdminAuthService = class AdminAuthService {
         this.prisma = prisma;
         this.jwtService = jwtService;
     }
+    async onModuleInit() {
+        const email = process.env.ADMIN_EMAIL.trim().toLowerCase();
+        const passwordHash = await bcrypt.hash(process.env.ADMIN_PASSWORD, 12);
+        await this.prisma.admin.upsert({
+            where: { email },
+            update: {
+                name: process.env.ADMIN_NAME?.trim() || 'Família Ana Clara',
+                passwordHash,
+                active: true,
+            },
+            create: {
+                name: process.env.ADMIN_NAME?.trim() || 'Família Ana Clara',
+                email,
+                passwordHash,
+                active: true,
+            },
+        });
+    }
     async login(dto) {
         const email = dto.email.trim().toLowerCase();
         const admin = await this.prisma.admin.findUnique({
