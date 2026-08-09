@@ -10,6 +10,13 @@ const rateLimitEntries = new Map<string, RateLimitEntry>();
 
 function rateLimit(maxRequests: number, windowMs: number) {
   return (request: Request, response: Response, next: NextFunction): void => {
+    // Requisições de preflight precisam chegar ao middleware de CORS e não
+    // representam uma tentativa de autenticação.
+    if (request.method === 'OPTIONS') {
+      next();
+      return;
+    }
+
     const now = Date.now();
     const key = `${request.ip}:${request.path}`;
     const current = rateLimitEntries.get(key);
@@ -67,6 +74,13 @@ async function bootstrap(): Promise<void> {
     expressApp.set('trust proxy', 1);
   }
 
+  app.enableCors({
+    origin: process.env.FRONTEND_URL
+      ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
+      : ['http://localhost:5173'],
+    credentials: true,
+  });
+
   app.use((request: Request, response: Response, next: NextFunction) => {
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('X-Frame-Options', 'DENY');
@@ -89,13 +103,6 @@ async function bootstrap(): Promise<void> {
       transform: true,
     }),
   );
-
-  app.enableCors({
-    origin: process.env.FRONTEND_URL
-      ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
-      : ['http://localhost:5173'],
-    credentials: true,
-  });
 
   app.enableShutdownHooks();
 

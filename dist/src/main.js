@@ -7,6 +7,10 @@ const app_module_1 = require("./app.module");
 const rateLimitEntries = new Map();
 function rateLimit(maxRequests, windowMs) {
     return (request, response, next) => {
+        if (request.method === 'OPTIONS') {
+            next();
+            return;
+        }
         const now = Date.now();
         const key = `${request.ip}:${request.path}`;
         const current = rateLimitEntries.get(key);
@@ -50,6 +54,12 @@ async function bootstrap() {
         const expressApp = app.getHttpAdapter().getInstance();
         expressApp.set('trust proxy', 1);
     }
+    app.enableCors({
+        origin: process.env.FRONTEND_URL
+            ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
+            : ['http://localhost:5173'],
+        credentials: true,
+    });
     app.use((request, response, next) => {
         response.setHeader('X-Content-Type-Options', 'nosniff');
         response.setHeader('X-Frame-Options', 'DENY');
@@ -65,12 +75,6 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
         transform: true,
     }));
-    app.enableCors({
-        origin: process.env.FRONTEND_URL
-            ? process.env.FRONTEND_URL.split(',').map((origin) => origin.trim())
-            : ['http://localhost:5173'],
-        credentials: true,
-    });
     app.enableShutdownHooks();
     const port = Number(process.env.PORT ?? 3000);
     await app.listen(port);
