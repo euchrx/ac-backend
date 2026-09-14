@@ -116,6 +116,7 @@ model GuestGiftChoice {
 }
 
 model GalleryPhoto {
+  ownerHash    String?
   id           String   @id @default(uuid())
   authorName   String
   caption      String?

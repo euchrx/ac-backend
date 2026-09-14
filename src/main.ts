@@ -102,13 +102,6 @@ async function bootstrap(): Promise<void> {
   });
   app.use('/api/admin/auth/login', rateLimit(8, 15 * 60 * 1000));
   app.use('/api/guest/access', rateLimit(12, 15 * 60 * 1000));
-  app.use(
-    '/api/gallery',
-    (request: Request, response: Response, next: NextFunction) => {
-      if (request.method !== 'POST') return next();
-      return rateLimit(20, 60 * 60 * 1000)(request, response, next);
-    },
-  );
 
   app.setGlobalPrefix('api');
 

@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
+import { createHash } from 'node:crypto';
 
 type UploadedPhoto = {
   buffer: Buffer;
@@ -28,10 +29,25 @@ const supportedSignatures: Record<string, (buffer: Buffer) => boolean> = {
 export class GalleryService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async list() {
+  private ownerHash(token?: string) {
+    if (!token || !/^[a-f0-9]{64}$/.test(token)) {
+      throw new BadRequestException('Identificação da galeria inválida.');
+    }
+    return createHash('sha256').update(token).digest('hex');
+  }
+
+  async remove(id: string, token?: string) {
+    const result = await this.prisma.galleryPhoto.deleteMany({
+      where: { id, ownerHash: this.ownerHash(token) },
+    });
+    if (!result.count) throw new NotFoundException('Publicação não encontrada ou não pertence a você.');
+    return { deleted: true };
+  }
+
+  async list(token?: string) {
     return this.prisma.galleryPhoto.findMany({
+      where: token === undefined ? undefined : { ownerHash: this.ownerHash(token) },
       orderBy: { createdAt: 'desc' },
-      take: 100,
       select: {
         id: true,
         authorName: true,
@@ -45,6 +61,7 @@ export class GalleryService {
     file: UploadedPhoto | undefined,
     authorName?: string,
     caption?: string,
+    token?: string,
   ) {
     if (!file)
       throw new BadRequestException('Selecione uma foto para publicar.');
@@ -68,6 +85,7 @@ export class GalleryService {
 
     return this.prisma.galleryPhoto.create({
       data: {
+        ownerHash: this.ownerHash(token),
         authorName: cleanName,
         caption: cleanCaption,
         mimeType: file.mimetype,

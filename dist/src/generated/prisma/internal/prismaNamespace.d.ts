@@ -791,6 +791,7 @@ export declare const GuestGiftChoiceScalarFieldEnum: {
 };
 export type GuestGiftChoiceScalarFieldEnum = (typeof GuestGiftChoiceScalarFieldEnum)[keyof typeof GuestGiftChoiceScalarFieldEnum];
 export declare const GalleryPhotoScalarFieldEnum: {
+    readonly ownerHash: "ownerHash";
     readonly id: "id";
     readonly authorName: "authorName";
     readonly caption: "caption";

@@ -15,7 +15,16 @@ export declare class GalleryController {
         authorName: string;
         caption: string | null;
     }[]>;
-    create(file: UploadedPhoto | undefined, authorName?: string, caption?: string): Promise<{
+    mine(token?: string): Promise<{
+        id: string;
+        createdAt: Date;
+        authorName: string;
+        caption: string | null;
+    }[]>;
+    remove(id: string, token?: string): Promise<{
+        deleted: boolean;
+    }>;
+    create(file: UploadedPhoto | undefined, authorName?: string, caption?: string, token?: string): Promise<{
         id: string;
         createdAt: Date;
         authorName: string;

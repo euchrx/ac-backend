@@ -24,13 +24,19 @@ let GalleryController = class GalleryController {
     list() {
         return this.galleryService.list();
     }
-    create(file, authorName, caption) {
-        return this.galleryService.create(file, authorName, caption);
+    mine(token) {
+        return this.galleryService.list(token || '');
+    }
+    remove(id, token) {
+        return this.galleryService.remove(id, token);
+    }
+    create(file, authorName, caption, token) {
+        return this.galleryService.create(file, authorName, caption, token);
     }
     async image(id, response) {
         const photo = await this.galleryService.image(id);
         response.setHeader('Content-Type', photo.mimeType);
-        response.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
+        response.setHeader('Cache-Control', 'no-store');
         response.send(Buffer.from(photo.imageData));
     }
 };
@@ -43,13 +49,30 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], GalleryController.prototype, "list", null);
 __decorate([
+    (0, common_1.Get)('mine'),
+    (0, common_1.Header)('Cache-Control', 'no-store'),
+    __param(0, (0, common_1.Headers)('x-gallery-owner')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], GalleryController.prototype, "mine", null);
+__decorate([
+    (0, common_1.Delete)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Headers)('x-gallery-owner')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", void 0)
+], GalleryController.prototype, "remove", null);
+__decorate([
     (0, common_1.Post)(),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('photo', { limits: { fileSize: 8 * 1024 * 1024 } })),
     __param(0, (0, common_1.UploadedFile)()),
     __param(1, (0, common_1.Body)('authorName')),
     __param(2, (0, common_1.Body)('caption')),
+    __param(3, (0, common_1.Headers)('x-gallery-owner')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, String, String]),
+    __metadata("design:paramtypes", [Object, String, String, String]),
     __metadata("design:returntype", void 0)
 ], GalleryController.prototype, "create", null);
 __decorate([

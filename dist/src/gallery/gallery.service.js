@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GalleryService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const node_crypto_1 = require("node:crypto");
 const supportedSignatures = {
     'image/jpeg': (buffer) => buffer[0] === 0xff && buffer[1] === 0xd8,
     'image/png': (buffer) => buffer
@@ -25,10 +26,24 @@ let GalleryService = class GalleryService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async list() {
+    ownerHash(token) {
+        if (!token || !/^[a-f0-9]{64}$/.test(token)) {
+            throw new common_1.BadRequestException('Identificação da galeria inválida.');
+        }
+        return (0, node_crypto_1.createHash)('sha256').update(token).digest('hex');
+    }
+    async remove(id, token) {
+        const result = await this.prisma.galleryPhoto.deleteMany({
+            where: { id, ownerHash: this.ownerHash(token) },
+        });
+        if (!result.count)
+            throw new common_1.NotFoundException('Publicação não encontrada ou não pertence a você.');
+        return { deleted: true };
+    }
+    async list(token) {
         return this.prisma.galleryPhoto.findMany({
+            where: token === undefined ? undefined : { ownerHash: this.ownerHash(token) },
             orderBy: { createdAt: 'desc' },
-            take: 100,
             select: {
                 id: true,
                 authorName: true,
@@ -37,7 +52,7 @@ let GalleryService = class GalleryService {
             },
         });
     }
-    async create(file, authorName, caption) {
+    async create(file, authorName, caption, token) {
         if (!file)
             throw new common_1.BadRequestException('Selecione uma foto para publicar.');
         const signatureMatches = supportedSignatures[file.mimetype];
@@ -54,6 +69,7 @@ let GalleryService = class GalleryService {
         }
         return this.prisma.galleryPhoto.create({
             data: {
+                ownerHash: this.ownerHash(token),
                 authorName: cleanName,
                 caption: cleanCaption,
                 mimeType: file.mimetype,

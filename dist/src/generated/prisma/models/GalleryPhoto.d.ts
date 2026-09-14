@@ -7,6 +7,7 @@ export type AggregateGalleryPhoto = {
     _max: GalleryPhotoMaxAggregateOutputType | null;
 };
 export type GalleryPhotoMinAggregateOutputType = {
+    ownerHash: string | null;
     id: string | null;
     authorName: string | null;
     caption: string | null;
@@ -16,6 +17,7 @@ export type GalleryPhotoMinAggregateOutputType = {
     createdAt: Date | null;
 };
 export type GalleryPhotoMaxAggregateOutputType = {
+    ownerHash: string | null;
     id: string | null;
     authorName: string | null;
     caption: string | null;
@@ -25,6 +27,7 @@ export type GalleryPhotoMaxAggregateOutputType = {
     createdAt: Date | null;
 };
 export type GalleryPhotoCountAggregateOutputType = {
+    ownerHash: number;
     id: number;
     authorName: number;
     caption: number;
@@ -35,6 +38,7 @@ export type GalleryPhotoCountAggregateOutputType = {
     _all: number;
 };
 export type GalleryPhotoMinAggregateInputType = {
+    ownerHash?: true;
     id?: true;
     authorName?: true;
     caption?: true;
@@ -44,6 +48,7 @@ export type GalleryPhotoMinAggregateInputType = {
     createdAt?: true;
 };
 export type GalleryPhotoMaxAggregateInputType = {
+    ownerHash?: true;
     id?: true;
     authorName?: true;
     caption?: true;
@@ -53,6 +58,7 @@ export type GalleryPhotoMaxAggregateInputType = {
     createdAt?: true;
 };
 export type GalleryPhotoCountAggregateInputType = {
+    ownerHash?: true;
     id?: true;
     authorName?: true;
     caption?: true;
@@ -87,6 +93,7 @@ export type GalleryPhotoGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
     _max?: GalleryPhotoMaxAggregateInputType;
 };
 export type GalleryPhotoGroupByOutputType = {
+    ownerHash: string | null;
     id: string;
     authorName: string;
     caption: string | null;
@@ -105,6 +112,7 @@ export type GalleryPhotoWhereInput = {
     AND?: Prisma.GalleryPhotoWhereInput | Prisma.GalleryPhotoWhereInput[];
     OR?: Prisma.GalleryPhotoWhereInput[];
     NOT?: Prisma.GalleryPhotoWhereInput | Prisma.GalleryPhotoWhereInput[];
+    ownerHash?: Prisma.StringNullableFilter<"GalleryPhoto"> | string | null;
     id?: Prisma.StringFilter<"GalleryPhoto"> | string;
     authorName?: Prisma.StringFilter<"GalleryPhoto"> | string;
     caption?: Prisma.StringNullableFilter<"GalleryPhoto"> | string | null;
@@ -114,6 +122,7 @@ export type GalleryPhotoWhereInput = {
     createdAt?: Prisma.DateTimeFilter<"GalleryPhoto"> | Date | string;
 };
 export type GalleryPhotoOrderByWithRelationInput = {
+    ownerHash?: Prisma.SortOrderInput | Prisma.SortOrder;
     id?: Prisma.SortOrder;
     authorName?: Prisma.SortOrder;
     caption?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -127,6 +136,7 @@ export type GalleryPhotoWhereUniqueInput = Prisma.AtLeast<{
     AND?: Prisma.GalleryPhotoWhereInput | Prisma.GalleryPhotoWhereInput[];
     OR?: Prisma.GalleryPhotoWhereInput[];
     NOT?: Prisma.GalleryPhotoWhereInput | Prisma.GalleryPhotoWhereInput[];
+    ownerHash?: Prisma.StringNullableFilter<"GalleryPhoto"> | string | null;
     authorName?: Prisma.StringFilter<"GalleryPhoto"> | string;
     caption?: Prisma.StringNullableFilter<"GalleryPhoto"> | string | null;
     mimeType?: Prisma.StringFilter<"GalleryPhoto"> | string;
@@ -135,6 +145,7 @@ export type GalleryPhotoWhereUniqueInput = Prisma.AtLeast<{
     createdAt?: Prisma.DateTimeFilter<"GalleryPhoto"> | Date | string;
 }, "id">;
 export type GalleryPhotoOrderByWithAggregationInput = {
+    ownerHash?: Prisma.SortOrderInput | Prisma.SortOrder;
     id?: Prisma.SortOrder;
     authorName?: Prisma.SortOrder;
     caption?: Prisma.SortOrderInput | Prisma.SortOrder;
@@ -150,6 +161,7 @@ export type GalleryPhotoScalarWhereWithAggregatesInput = {
     AND?: Prisma.GalleryPhotoScalarWhereWithAggregatesInput | Prisma.GalleryPhotoScalarWhereWithAggregatesInput[];
     OR?: Prisma.GalleryPhotoScalarWhereWithAggregatesInput[];
     NOT?: Prisma.GalleryPhotoScalarWhereWithAggregatesInput | Prisma.GalleryPhotoScalarWhereWithAggregatesInput[];
+    ownerHash?: Prisma.StringNullableWithAggregatesFilter<"GalleryPhoto"> | string | null;
     id?: Prisma.StringWithAggregatesFilter<"GalleryPhoto"> | string;
     authorName?: Prisma.StringWithAggregatesFilter<"GalleryPhoto"> | string;
     caption?: Prisma.StringNullableWithAggregatesFilter<"GalleryPhoto"> | string | null;
@@ -159,6 +171,7 @@ export type GalleryPhotoScalarWhereWithAggregatesInput = {
     createdAt?: Prisma.DateTimeWithAggregatesFilter<"GalleryPhoto"> | Date | string;
 };
 export type GalleryPhotoCreateInput = {
+    ownerHash?: string | null;
     id?: string;
     authorName: string;
     caption?: string | null;
@@ -168,6 +181,7 @@ export type GalleryPhotoCreateInput = {
     createdAt?: Date | string;
 };
 export type GalleryPhotoUncheckedCreateInput = {
+    ownerHash?: string | null;
     id?: string;
     authorName: string;
     caption?: string | null;
@@ -177,6 +191,7 @@ export type GalleryPhotoUncheckedCreateInput = {
     createdAt?: Date | string;
 };
 export type GalleryPhotoUpdateInput = {
+    ownerHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     authorName?: Prisma.StringFieldUpdateOperationsInput | string;
     caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
@@ -186,6 +201,7 @@ export type GalleryPhotoUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type GalleryPhotoUncheckedUpdateInput = {
+    ownerHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     authorName?: Prisma.StringFieldUpdateOperationsInput | string;
     caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
@@ -195,6 +211,7 @@ export type GalleryPhotoUncheckedUpdateInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type GalleryPhotoCreateManyInput = {
+    ownerHash?: string | null;
     id?: string;
     authorName: string;
     caption?: string | null;
@@ -204,6 +221,7 @@ export type GalleryPhotoCreateManyInput = {
     createdAt?: Date | string;
 };
 export type GalleryPhotoUpdateManyMutationInput = {
+    ownerHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     authorName?: Prisma.StringFieldUpdateOperationsInput | string;
     caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
@@ -213,6 +231,7 @@ export type GalleryPhotoUpdateManyMutationInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type GalleryPhotoUncheckedUpdateManyInput = {
+    ownerHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
     id?: Prisma.StringFieldUpdateOperationsInput | string;
     authorName?: Prisma.StringFieldUpdateOperationsInput | string;
     caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null;
@@ -222,6 +241,7 @@ export type GalleryPhotoUncheckedUpdateManyInput = {
     createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string;
 };
 export type GalleryPhotoCountOrderByAggregateInput = {
+    ownerHash?: Prisma.SortOrder;
     id?: Prisma.SortOrder;
     authorName?: Prisma.SortOrder;
     caption?: Prisma.SortOrder;
@@ -231,6 +251,7 @@ export type GalleryPhotoCountOrderByAggregateInput = {
     createdAt?: Prisma.SortOrder;
 };
 export type GalleryPhotoMaxOrderByAggregateInput = {
+    ownerHash?: Prisma.SortOrder;
     id?: Prisma.SortOrder;
     authorName?: Prisma.SortOrder;
     caption?: Prisma.SortOrder;
@@ -240,6 +261,7 @@ export type GalleryPhotoMaxOrderByAggregateInput = {
     createdAt?: Prisma.SortOrder;
 };
 export type GalleryPhotoMinOrderByAggregateInput = {
+    ownerHash?: Prisma.SortOrder;
     id?: Prisma.SortOrder;
     authorName?: Prisma.SortOrder;
     caption?: Prisma.SortOrder;
@@ -252,6 +274,7 @@ export type BytesFieldUpdateOperationsInput = {
     set?: runtime.Bytes;
 };
 export type GalleryPhotoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    ownerHash?: boolean;
     id?: boolean;
     authorName?: boolean;
     caption?: boolean;
@@ -261,6 +284,7 @@ export type GalleryPhotoSelect<ExtArgs extends runtime.Types.Extensions.Internal
     createdAt?: boolean;
 }, ExtArgs["result"]["galleryPhoto"]>;
 export type GalleryPhotoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    ownerHash?: boolean;
     id?: boolean;
     authorName?: boolean;
     caption?: boolean;
@@ -270,6 +294,7 @@ export type GalleryPhotoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
     createdAt?: boolean;
 }, ExtArgs["result"]["galleryPhoto"]>;
 export type GalleryPhotoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+    ownerHash?: boolean;
     id?: boolean;
     authorName?: boolean;
     caption?: boolean;
@@ -279,6 +304,7 @@ export type GalleryPhotoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
     createdAt?: boolean;
 }, ExtArgs["result"]["galleryPhoto"]>;
 export type GalleryPhotoSelectScalar = {
+    ownerHash?: boolean;
     id?: boolean;
     authorName?: boolean;
     caption?: boolean;
@@ -287,11 +313,12 @@ export type GalleryPhotoSelectScalar = {
     originalName?: boolean;
     createdAt?: boolean;
 };
-export type GalleryPhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "authorName" | "caption" | "mimeType" | "imageData" | "originalName" | "createdAt", ExtArgs["result"]["galleryPhoto"]>;
+export type GalleryPhotoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"ownerHash" | "id" | "authorName" | "caption" | "mimeType" | "imageData" | "originalName" | "createdAt", ExtArgs["result"]["galleryPhoto"]>;
 export type $GalleryPhotoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
     name: "GalleryPhoto";
     objects: {};
     scalars: runtime.Types.Extensions.GetPayloadResult<{
+        ownerHash: string | null;
         id: string;
         authorName: string;
         caption: string | null;
@@ -356,6 +383,7 @@ export interface Prisma__GalleryPhotoClient<T, Null = never, ExtArgs extends run
     finally(onfinally?: (() => void) | undefined | null): runtime.Types.Utils.JsPromise<T>;
 }
 export interface GalleryPhotoFieldRefs {
+    readonly ownerHash: Prisma.FieldRef<"GalleryPhoto", 'String'>;
     readonly id: Prisma.FieldRef<"GalleryPhoto", 'String'>;
     readonly authorName: Prisma.FieldRef<"GalleryPhoto", 'String'>;
     readonly caption: Prisma.FieldRef<"GalleryPhoto", 'String'>;

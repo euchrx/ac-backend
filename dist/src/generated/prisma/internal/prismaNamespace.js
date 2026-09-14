@@ -127,6 +127,7 @@ exports.GuestGiftChoiceScalarFieldEnum = {
     createdAt: 'createdAt'
 };
 exports.GalleryPhotoScalarFieldEnum = {
+    ownerHash: 'ownerHash',
     id: 'id',
     authorName: 'authorName',
     caption: 'caption',
