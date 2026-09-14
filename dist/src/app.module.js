@@ -13,6 +13,7 @@ const admin_panel_module_1 = require("./admin-panel/admin-panel.module");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const gifts_module_1 = require("./gifts/gifts.module");
+const gallery_module_1 = require("./gallery/gallery.module");
 const guest_auth_module_1 = require("./guest-auth/guest-auth.module");
 const prisma_module_1 = require("./prisma/prisma.module");
 let AppModule = class AppModule {
@@ -25,6 +26,7 @@ exports.AppModule = AppModule = __decorate([
             admin_auth_module_1.AdminAuthModule,
             guest_auth_module_1.GuestAuthModule,
             gifts_module_1.GiftsModule,
+            gallery_module_1.GalleryModule,
             admin_panel_module_1.AdminPanelModule,
         ],
         controllers: [app_controller_1.AppController],

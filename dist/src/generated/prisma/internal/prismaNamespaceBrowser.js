@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.GuestGiftChoiceScalarFieldEnum = exports.GiftScalarFieldEnum = exports.CompanionGiftChoiceScalarFieldEnum = exports.CompanionScalarFieldEnum = exports.GuestScalarFieldEnum = exports.AdminScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
+exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.GalleryPhotoScalarFieldEnum = exports.GuestGiftChoiceScalarFieldEnum = exports.GiftScalarFieldEnum = exports.CompanionGiftChoiceScalarFieldEnum = exports.CompanionScalarFieldEnum = exports.GuestScalarFieldEnum = exports.AdminScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.Decimal = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/index-browser"));
 exports.Decimal = runtime.Decimal;
 exports.NullTypes = {
@@ -50,7 +50,8 @@ exports.ModelName = {
     Companion: 'Companion',
     CompanionGiftChoice: 'CompanionGiftChoice',
     Gift: 'Gift',
-    GuestGiftChoice: 'GuestGiftChoice'
+    GuestGiftChoice: 'GuestGiftChoice',
+    GalleryPhoto: 'GalleryPhoto'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -108,6 +109,15 @@ exports.GuestGiftChoiceScalarFieldEnum = {
     id: 'id',
     guestId: 'guestId',
     giftId: 'giftId',
+    createdAt: 'createdAt'
+};
+exports.GalleryPhotoScalarFieldEnum = {
+    id: 'id',
+    authorName: 'authorName',
+    caption: 'caption',
+    mimeType: 'mimeType',
+    imageData: 'imageData',
+    originalName: 'originalName',
     createdAt: 'createdAt'
 };
 exports.SortOrder = {

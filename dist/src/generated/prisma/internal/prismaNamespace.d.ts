@@ -166,6 +166,7 @@ export declare const ModelName: {
     readonly CompanionGiftChoice: "CompanionGiftChoice";
     readonly Gift: "Gift";
     readonly GuestGiftChoice: "GuestGiftChoice";
+    readonly GalleryPhoto: "GalleryPhoto";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export interface TypeMapCb<GlobalOmitOptions = {}> extends runtime.Types.Utils.Fn<{
@@ -178,7 +179,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         omit: GlobalOmitOptions;
     };
     meta: {
-        modelProps: "admin" | "guest" | "companion" | "companionGiftChoice" | "gift" | "guestGiftChoice";
+        modelProps: "admin" | "guest" | "companion" | "companionGiftChoice" | "gift" | "guestGiftChoice" | "galleryPhoto";
         txIsolationLevel: TransactionIsolationLevel;
     };
     model: {
@@ -626,6 +627,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
                 };
             };
         };
+        GalleryPhoto: {
+            payload: Prisma.$GalleryPhotoPayload<ExtArgs>;
+            fields: Prisma.GalleryPhotoFieldRefs;
+            operations: {
+                findUnique: {
+                    args: Prisma.GalleryPhotoFindUniqueArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload> | null;
+                };
+                findUniqueOrThrow: {
+                    args: Prisma.GalleryPhotoFindUniqueOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                findFirst: {
+                    args: Prisma.GalleryPhotoFindFirstArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload> | null;
+                };
+                findFirstOrThrow: {
+                    args: Prisma.GalleryPhotoFindFirstOrThrowArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                findMany: {
+                    args: Prisma.GalleryPhotoFindManyArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>[];
+                };
+                create: {
+                    args: Prisma.GalleryPhotoCreateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                createMany: {
+                    args: Prisma.GalleryPhotoCreateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                createManyAndReturn: {
+                    args: Prisma.GalleryPhotoCreateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>[];
+                };
+                delete: {
+                    args: Prisma.GalleryPhotoDeleteArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                update: {
+                    args: Prisma.GalleryPhotoUpdateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                deleteMany: {
+                    args: Prisma.GalleryPhotoDeleteManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateMany: {
+                    args: Prisma.GalleryPhotoUpdateManyArgs<ExtArgs>;
+                    result: BatchPayload;
+                };
+                updateManyAndReturn: {
+                    args: Prisma.GalleryPhotoUpdateManyAndReturnArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>[];
+                };
+                upsert: {
+                    args: Prisma.GalleryPhotoUpsertArgs<ExtArgs>;
+                    result: runtime.Types.Utils.PayloadToResult<Prisma.$GalleryPhotoPayload>;
+                };
+                aggregate: {
+                    args: Prisma.GalleryPhotoAggregateArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.AggregateGalleryPhoto>;
+                };
+                groupBy: {
+                    args: Prisma.GalleryPhotoGroupByArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.GalleryPhotoGroupByOutputType>[];
+                };
+                count: {
+                    args: Prisma.GalleryPhotoCountArgs<ExtArgs>;
+                    result: runtime.Types.Utils.Optional<Prisma.GalleryPhotoCountAggregateOutputType> | number;
+                };
+            };
+        };
     };
 } & {
     other: {
@@ -715,6 +790,16 @@ export declare const GuestGiftChoiceScalarFieldEnum: {
     readonly createdAt: "createdAt";
 };
 export type GuestGiftChoiceScalarFieldEnum = (typeof GuestGiftChoiceScalarFieldEnum)[keyof typeof GuestGiftChoiceScalarFieldEnum];
+export declare const GalleryPhotoScalarFieldEnum: {
+    readonly id: "id";
+    readonly authorName: "authorName";
+    readonly caption: "caption";
+    readonly mimeType: "mimeType";
+    readonly imageData: "imageData";
+    readonly originalName: "originalName";
+    readonly createdAt: "createdAt";
+};
+export type GalleryPhotoScalarFieldEnum = (typeof GalleryPhotoScalarFieldEnum)[keyof typeof GalleryPhotoScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";
@@ -743,6 +828,8 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>;
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>;
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>;
+export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>;
+export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>;
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>;
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>;
 export type BatchPayload = {
@@ -779,6 +866,7 @@ export type GlobalOmitConfig = {
     companionGiftChoice?: Prisma.CompanionGiftChoiceOmit;
     gift?: Prisma.GiftOmit;
     guestGiftChoice?: Prisma.GuestGiftChoiceOmit;
+    galleryPhoto?: Prisma.GalleryPhotoOmit;
 };
 export type LogLevel = 'info' | 'query' | 'warn' | 'error';
 export type LogDefinition = {

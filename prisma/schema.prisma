@@ -114,3 +114,16 @@ model GuestGiftChoice {
   @@index([giftId])
   @@map("guest_gift_choices")
 }
+
+model GalleryPhoto {
+  id           String   @id @default(uuid())
+  authorName   String
+  caption      String?
+  mimeType     String
+  imageData    Bytes
+  originalName String?
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+  @@map("gallery_photos")
+}

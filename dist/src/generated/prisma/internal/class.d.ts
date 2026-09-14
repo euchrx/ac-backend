@@ -48,5 +48,8 @@ export interface PrismaClient<in LogOpts extends Prisma.LogLevel = never, in out
     get guestGiftChoice(): Prisma.GuestGiftChoiceDelegate<ExtArgs, {
         omit: OmitOpts;
     }>;
+    get galleryPhoto(): Prisma.GalleryPhotoDelegate<ExtArgs, {
+        omit: OmitOpts;
+    }>;
 }
 export declare function getPrismaClientClass(): PrismaClientConstructor;

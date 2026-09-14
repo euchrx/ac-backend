@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.GuestGiftChoiceScalarFieldEnum = exports.GiftScalarFieldEnum = exports.CompanionGiftChoiceScalarFieldEnum = exports.CompanionScalarFieldEnum = exports.GuestScalarFieldEnum = exports.AdminScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
+exports.defineExtension = exports.NullsOrder = exports.QueryMode = exports.SortOrder = exports.GalleryPhotoScalarFieldEnum = exports.GuestGiftChoiceScalarFieldEnum = exports.GiftScalarFieldEnum = exports.CompanionGiftChoiceScalarFieldEnum = exports.CompanionScalarFieldEnum = exports.GuestScalarFieldEnum = exports.AdminScalarFieldEnum = exports.TransactionIsolationLevel = exports.ModelName = exports.AnyNull = exports.JsonNull = exports.DbNull = exports.NullTypes = exports.prismaVersion = exports.getExtensionContext = exports.Decimal = exports.Sql = exports.raw = exports.join = exports.empty = exports.sql = exports.PrismaClientValidationError = exports.PrismaClientInitializationError = exports.PrismaClientRustPanicError = exports.PrismaClientUnknownRequestError = exports.PrismaClientKnownRequestError = void 0;
 const runtime = __importStar(require("@prisma/client/runtime/client"));
 exports.PrismaClientKnownRequestError = runtime.PrismaClientKnownRequestError;
 exports.PrismaClientUnknownRequestError = runtime.PrismaClientUnknownRequestError;
@@ -65,7 +65,8 @@ exports.ModelName = {
     Companion: 'Companion',
     CompanionGiftChoice: 'CompanionGiftChoice',
     Gift: 'Gift',
-    GuestGiftChoice: 'GuestGiftChoice'
+    GuestGiftChoice: 'GuestGiftChoice',
+    GalleryPhoto: 'GalleryPhoto'
 };
 exports.TransactionIsolationLevel = runtime.makeStrictEnum({
     ReadUncommitted: 'ReadUncommitted',
@@ -123,6 +124,15 @@ exports.GuestGiftChoiceScalarFieldEnum = {
     id: 'id',
     guestId: 'guestId',
     giftId: 'giftId',
+    createdAt: 'createdAt'
+};
+exports.GalleryPhotoScalarFieldEnum = {
+    id: 'id',
+    authorName: 'authorName',
+    caption: 'caption',
+    mimeType: 'mimeType',
+    imageData: 'imageData',
+    originalName: 'originalName',
     createdAt: 'createdAt'
 };
 exports.SortOrder = {

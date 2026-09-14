@@ -8,3 +8,4 @@ export type Companion = Prisma.CompanionModel;
 export type CompanionGiftChoice = Prisma.CompanionGiftChoiceModel;
 export type Gift = Prisma.GiftModel;
 export type GuestGiftChoice = Prisma.GuestGiftChoiceModel;
+export type GalleryPhoto = Prisma.GalleryPhotoModel;

@@ -5,6 +5,7 @@ import { AdminPanelModule } from './admin-panel/admin-panel.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GiftsModule } from './gifts/gifts.module';
+import { GalleryModule } from './gallery/gallery.module';
 import { GuestAuthModule } from './guest-auth/guest-auth.module';
 import { PrismaModule } from './prisma/prisma.module';
 
@@ -14,6 +15,7 @@ import { PrismaModule } from './prisma/prisma.module';
     AdminAuthModule,
     GuestAuthModule,
     GiftsModule,
+    GalleryModule,
     AdminPanelModule,
   ],
   controllers: [AppController],

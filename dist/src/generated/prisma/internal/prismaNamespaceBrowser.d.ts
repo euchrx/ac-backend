@@ -17,6 +17,7 @@ export declare const ModelName: {
     readonly CompanionGiftChoice: "CompanionGiftChoice";
     readonly Gift: "Gift";
     readonly GuestGiftChoice: "GuestGiftChoice";
+    readonly GalleryPhoto: "GalleryPhoto";
 };
 export type ModelName = (typeof ModelName)[keyof typeof ModelName];
 export declare const TransactionIsolationLevel: {
@@ -84,6 +85,16 @@ export declare const GuestGiftChoiceScalarFieldEnum: {
     readonly createdAt: "createdAt";
 };
 export type GuestGiftChoiceScalarFieldEnum = (typeof GuestGiftChoiceScalarFieldEnum)[keyof typeof GuestGiftChoiceScalarFieldEnum];
+export declare const GalleryPhotoScalarFieldEnum: {
+    readonly id: "id";
+    readonly authorName: "authorName";
+    readonly caption: "caption";
+    readonly mimeType: "mimeType";
+    readonly imageData: "imageData";
+    readonly originalName: "originalName";
+    readonly createdAt: "createdAt";
+};
+export type GalleryPhotoScalarFieldEnum = (typeof GalleryPhotoScalarFieldEnum)[keyof typeof GalleryPhotoScalarFieldEnum];
 export declare const SortOrder: {
     readonly asc: "asc";
     readonly desc: "desc";

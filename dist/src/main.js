@@ -73,11 +73,16 @@ async function bootstrap() {
         response.setHeader('X-Content-Type-Options', 'nosniff');
         response.setHeader('X-Frame-Options', 'DENY');
         response.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
-        response.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
+        response.setHeader('Permissions-Policy', 'camera=(self), microphone=(), geolocation=()');
         next();
     });
     app.use('/api/admin/auth/login', rateLimit(8, 15 * 60 * 1000));
     app.use('/api/guest/access', rateLimit(12, 15 * 60 * 1000));
+    app.use('/api/gallery', (request, response, next) => {
+        if (request.method !== 'POST')
+            return next();
+        return rateLimit(20, 60 * 60 * 1000)(request, response, next);
+    });
     app.setGlobalPrefix('api');
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
