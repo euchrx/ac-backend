@@ -10,12 +10,15 @@ exports.GalleryModule = void 0;
 const common_1 = require("@nestjs/common");
 const gallery_controller_1 = require("./gallery.controller");
 const gallery_service_1 = require("./gallery.service");
+const admin_auth_module_1 = require("../admin-auth/admin-auth.module");
+const gallery_admin_controller_1 = require("./gallery-admin.controller");
 let GalleryModule = class GalleryModule {
 };
 exports.GalleryModule = GalleryModule;
 exports.GalleryModule = GalleryModule = __decorate([
     (0, common_1.Module)({
-        controllers: [gallery_controller_1.GalleryController],
+        imports: [admin_auth_module_1.AdminAuthModule],
+        controllers: [gallery_controller_1.GalleryController, gallery_admin_controller_1.GalleryAdminController],
         providers: [gallery_service_1.GalleryService],
     })
 ], GalleryModule);

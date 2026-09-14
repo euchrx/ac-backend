@@ -12,6 +12,9 @@ export declare class GalleryService {
     remove(id: string, token?: string): Promise<{
         deleted: boolean;
     }>;
+    removeAsAdmin(id: string): Promise<{
+        deleted: boolean;
+    }>;
     list(token?: string): Promise<{
         id: string;
         createdAt: Date;

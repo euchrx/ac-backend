@@ -44,6 +44,12 @@ export class GalleryService {
     return { deleted: true };
   }
 
+  async removeAsAdmin(id: string) {
+    const result = await this.prisma.galleryPhoto.deleteMany({ where: { id } });
+    if (!result.count) throw new NotFoundException('Foto não encontrada.');
+    return { deleted: true };
+  }
+
   async list(token?: string) {
     return this.prisma.galleryPhoto.findMany({
       where: token === undefined ? undefined : { ownerHash: this.ownerHash(token) },

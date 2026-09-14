@@ -40,6 +40,12 @@ let GalleryService = class GalleryService {
             throw new common_1.NotFoundException('Publicação não encontrada ou não pertence a você.');
         return { deleted: true };
     }
+    async removeAsAdmin(id) {
+        const result = await this.prisma.galleryPhoto.deleteMany({ where: { id } });
+        if (!result.count)
+            throw new common_1.NotFoundException('Foto não encontrada.');
+        return { deleted: true };
+    }
     async list(token) {
         return this.prisma.galleryPhoto.findMany({
             where: token === undefined ? undefined : { ownerHash: this.ownerHash(token) },
