@@ -50,8 +50,8 @@ export declare class GiftsController {
     chooseCompanionGift(companion: AuthenticatedCompanion, giftId: string): Promise<{
         id: string;
         createdAt: Date;
-        companionId: string;
         giftId: string;
+        companionId: string;
     }>;
     removeCompanionGift(companion: AuthenticatedCompanion, giftId: string): Promise<{
         message: string;

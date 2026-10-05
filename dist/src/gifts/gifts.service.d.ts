@@ -48,8 +48,8 @@ export declare class GiftsService {
     chooseCompanionGift(companionId: string, giftId: string): Promise<{
         id: string;
         createdAt: Date;
-        companionId: string;
         giftId: string;
+        companionId: string;
     }>;
     removeCompanionGift(companionId: string, giftId: string): Promise<{
         message: string;

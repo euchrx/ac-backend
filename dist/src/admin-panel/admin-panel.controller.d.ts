@@ -51,9 +51,9 @@ export declare class AdminPanelController {
         createdAt: Date;
         updatedAt: Date;
         phone: string;
-        normalizedPhone: string;
         attendance: import("../generated/prisma/enums").AttendanceStatus;
         notes: string | null;
+        normalizedPhone: string;
     })[]>;
     getGuest(guestId: string): Promise<{
         giftChoices: {
@@ -88,9 +88,9 @@ export declare class AdminPanelController {
         createdAt: Date;
         updatedAt: Date;
         phone: string;
-        normalizedPhone: string;
         attendance: import("../generated/prisma/enums").AttendanceStatus;
         notes: string | null;
+        normalizedPhone: string;
     }>;
     updateGuest(guestId: string, dto: AdminUpdateGuestDto): Promise<{
         giftChoices: {
@@ -125,9 +125,9 @@ export declare class AdminPanelController {
         createdAt: Date;
         updatedAt: Date;
         phone: string;
-        normalizedPhone: string;
         attendance: import("../generated/prisma/enums").AttendanceStatus;
         notes: string | null;
+        normalizedPhone: string;
     }>;
     updateCompanions(guestId: string, dto: AdminUpdateCompanionsDto): Promise<{
         giftChoices: {
@@ -162,9 +162,9 @@ export declare class AdminPanelController {
         createdAt: Date;
         updatedAt: Date;
         phone: string;
-        normalizedPhone: string;
         attendance: import("../generated/prisma/enums").AttendanceStatus;
         notes: string | null;
+        normalizedPhone: string;
     }>;
     deleteGuest(guestId: string): Promise<{
         message: string;

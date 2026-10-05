@@ -14,12 +14,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GalleryAdminController = void 0;
 const common_1 = require("@nestjs/common");
+const current_admin_decorator_1 = require("../admin-auth/decorators/current-admin.decorator");
+const gallery_export_service_1 = require("./gallery-export.service");
 const admin_auth_guard_1 = require("../admin-auth/guards/admin-auth.guard");
 const gallery_service_1 = require("./gallery.service");
+const gallery_upload_test_service_1 = require("./gallery-upload-test.service");
 let GalleryAdminController = class GalleryAdminController {
     gallery;
-    constructor(gallery) {
+    galleryExport;
+    uploadTest;
+    constructor(gallery, galleryExport, uploadTest) {
         this.gallery = gallery;
+        this.galleryExport = galleryExport;
+        this.uploadTest = uploadTest;
+    }
+    uploadTestStatus() {
+        return this.uploadTest.status();
+    }
+    testLargeUpload(request) {
+        return this.uploadTest.receive(request);
+    }
+    exportTicket(admin) {
+        return this.galleryExport.ticket(admin.id);
     }
     access() {
         return { authorized: true };
@@ -29,6 +45,26 @@ let GalleryAdminController = class GalleryAdminController {
     }
 };
 exports.GalleryAdminController = GalleryAdminController;
+__decorate([
+    (0, common_1.Get)('upload-test'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], GalleryAdminController.prototype, "uploadTestStatus", null);
+__decorate([
+    (0, common_1.Post)('upload-test'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], GalleryAdminController.prototype, "testLargeUpload", null);
+__decorate([
+    (0, common_1.Post)('export-ticket'),
+    __param(0, (0, current_admin_decorator_1.CurrentAdmin)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], GalleryAdminController.prototype, "exportTicket", null);
 __decorate([
     (0, common_1.Get)('access'),
     __metadata("design:type", Function),
@@ -45,6 +81,8 @@ __decorate([
 exports.GalleryAdminController = GalleryAdminController = __decorate([
     (0, common_1.Controller)('admin/gallery'),
     (0, common_1.UseGuards)(admin_auth_guard_1.AdminAuthGuard),
-    __metadata("design:paramtypes", [gallery_service_1.GalleryService])
+    __metadata("design:paramtypes", [gallery_service_1.GalleryService,
+        gallery_export_service_1.GalleryExportService,
+        gallery_upload_test_service_1.GalleryUploadTestService])
 ], GalleryAdminController);
 //# sourceMappingURL=gallery-admin.controller.js.map

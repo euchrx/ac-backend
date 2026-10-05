@@ -12,14 +12,21 @@ const gallery_controller_1 = require("./gallery.controller");
 const gallery_service_1 = require("./gallery.service");
 const admin_auth_module_1 = require("../admin-auth/admin-auth.module");
 const gallery_admin_controller_1 = require("./gallery-admin.controller");
+const gallery_export_controller_1 = require("./gallery-export.controller");
+const gallery_export_service_1 = require("./gallery-export.service");
+const gallery_upload_test_service_1 = require("./gallery-upload-test.service");
 let GalleryModule = class GalleryModule {
 };
 exports.GalleryModule = GalleryModule;
 exports.GalleryModule = GalleryModule = __decorate([
     (0, common_1.Module)({
         imports: [admin_auth_module_1.AdminAuthModule],
-        controllers: [gallery_controller_1.GalleryController, gallery_admin_controller_1.GalleryAdminController],
-        providers: [gallery_service_1.GalleryService],
+        controllers: [
+            gallery_controller_1.GalleryController,
+            gallery_admin_controller_1.GalleryAdminController,
+            gallery_export_controller_1.GalleryExportController,
+        ],
+        providers: [gallery_service_1.GalleryService, gallery_export_service_1.GalleryExportService, gallery_upload_test_service_1.GalleryUploadTestService],
     })
 ], GalleryModule);
 //# sourceMappingURL=gallery.module.js.map
